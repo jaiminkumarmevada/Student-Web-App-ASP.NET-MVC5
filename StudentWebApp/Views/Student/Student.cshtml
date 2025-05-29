@@ -5,7 +5,12 @@
     ViewBag.Title = "Student";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
 
+    .error {
+        color:red;
+    }
+</style>
 <h2>Students</h2>
 
 @using (Html.BeginForm("AddStudent", "Student", FormMethod.Post))
@@ -14,16 +19,19 @@
 
         <div class="form-group">
             <label>Name</label>
+            @Html.ValidationMessageFor(model => model.Fname,"", new { @class = "error" })
             @Html.TextBoxFor(model => model.Fname, new { @class = "form-control" })
         </div>
 
         <div class="form-group">
             <label>Email</label>
+            @Html.ValidationMessageFor(model => model.Email, "", new {@class="error"})
             @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
         </div>
         <div>
             <label>Mobile</label>
-            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Mobile, "", new {@class="error"})
+            @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control" })
         </div>
 
         <div class="form-group">
