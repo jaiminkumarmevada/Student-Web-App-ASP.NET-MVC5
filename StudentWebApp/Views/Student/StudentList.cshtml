@@ -1,0 +1,20 @@
+﻿@model List<StudentWebApp.Context.tbl_student>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Description</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Fname</td>
+            <td>@item.Email</td>
+            <td>@item.Mobile</td>
+            <td>@item.Description</td>
+        </tr>
+    }
+    //not completed yet watch video--->from 30 min
+</table>

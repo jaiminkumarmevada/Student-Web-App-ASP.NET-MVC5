@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 
 namespace StudentWebApp.Controllers
 {
@@ -33,11 +34,16 @@ namespace StudentWebApp.Controllers
 
             DBcontext.tbl_student.Add(student);
             if (!ModelState.IsValid) { return View("Student", model); }
-
-            else { DBcontext.SaveChanges(); }
+            else { DBcontext.SaveChanges(); ModelState.Clear(); }
 
             DBcontext.SaveChanges();
             return RedirectToAction("Student");
+
+        }
+        public ActionResult StudentList()
+        {
+            var result = DBcontext.tbl_student.ToList();
+            return View(result);
 
         }
     }
