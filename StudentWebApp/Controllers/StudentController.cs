@@ -1,4 +1,5 @@
-﻿using StudentWebApp.Context;
+﻿using Microsoft.Ajax.Utilities;
+using StudentWebApp.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace StudentWebApp.Controllers
 {
     public class StudentController : Controller
     {
-        Db_TestEntities DBcontext = new Db_TestEntities(); 
+        Db_TestEntities DBcontext = new Db_TestEntities();
 
         // GET: Student
 
@@ -25,12 +26,16 @@ namespace StudentWebApp.Controllers
         {
             tbl_student student = new tbl_student();
 
-            student.Fname = model.Fname;    
+            student.Fname = model.Fname;
             student.Email = model.Email;
             student.Mobile = model.Mobile;
             student.Description = model.Description;
 
             DBcontext.tbl_student.Add(student);
+            if (!ModelState.IsValid) { return View("Student", model); }
+
+            else { DBcontext.SaveChanges(); }
+
             DBcontext.SaveChanges();
             return RedirectToAction("Student");
 
