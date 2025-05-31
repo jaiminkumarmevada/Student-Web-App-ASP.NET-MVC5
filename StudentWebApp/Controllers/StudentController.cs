@@ -3,6 +3,7 @@ using StudentWebApp.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -44,6 +45,17 @@ namespace StudentWebApp.Controllers
         {
             var result = DBcontext.tbl_student.ToList();
             return View(result);
+
+        }
+        public ActionResult Delete(int Id)
+        {
+            var result = DBcontext.tbl_student.Where(x => x.Id == Id).FirstOrDefault();
+
+            DBcontext.tbl_student.Remove(result);
+            DBcontext.SaveChanges();
+
+            var List = DBcontext.tbl_student.ToList();
+            return View("StudenList",List);
 
         }
     }
